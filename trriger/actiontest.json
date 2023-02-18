@@ -1,5 +1,6 @@
 {
 	"test1": "CIが稼働すること",
 	"test2": "同一ブランチ２回目のpushでCIが稼働すること",
-	"test3": "Isseueからきって正常にCIが稼働するかテスト"
+	"test3": "Isseueからきって正常にCIが稼働するかテスト",
+	"test4": "revert時の挙動確認"
 }
