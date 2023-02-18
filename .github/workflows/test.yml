@@ -1,0 +1,69 @@
+name: "StepfunctionsByTest"
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "trriger/**"
+  pull_request:
+    branches:
+      - main
+
+    types: [closed]
+    paths:
+      - "trriger/**"
+  workflow_dispatch:
+#-------------------------#
+# 環境変数
+#-------------------------#
+env:
+  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+  SLACK_USERNAME: GitHubActions
+  SLACK_CHANNEL: infra_notifications
+  SLACK_ICON: https://octodex.github.com/images/Robotocat.png
+  ENV_DIRCTORY: production
+
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+
+jobs:
+  terraform:
+    name: "TerraformCI"
+    runs-on: ubuntu-latest
+    environment: production
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      # Checkout the repository to the GitHub Actions runner
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Merged Only
+        # merge時にジョブが稼働しなかったためコメントアウト
+        #        if: github.ref == 'refs/heads/master' && github.event.pull_request.merged == true
+        if: github.event.pull_request.merged == true
+        run: |
+          echo "Merged OK"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Slack Notification on Success
+        if: ${{ success() }}
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_TITLE: Deploy Success
+          SLACK_COLOR: good
+          # 失敗
+      - name: Slack Notification on Failure
+        if: ${{ failure() }}
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_TITLE: Deploy Failure
+          SLACK_COLOR: danger
