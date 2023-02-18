@@ -11,6 +11,6 @@ jobs:
     steps:
       - uses: actions/first-interaction@v1
         with:
-          INPUT_REPO-TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          INPUT_ISSUE-MESSAGE: "Message that will be displayed on users first issue"
+          REPO-TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE-MESSAGE: "Message that will be displayed on users first issue"
           pr-message: "Message that will be displayed on users first pull request"
