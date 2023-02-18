@@ -1,4 +1,4 @@
-name: "StepfunctionsByTest"
+name: "GitHubActionByTest"
 
 on:
   push:
