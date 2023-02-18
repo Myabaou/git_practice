@@ -20,9 +20,9 @@ on:
 env:
   SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
   SLACK_USERNAME: GitHubActions
-  SLACK_CHANNEL: infra_notifications
+  SLACK_CHANNEL: github
   SLACK_ICON: https://octodex.github.com/images/Robotocat.png
-  ENV_DIRCTORY: production
+  ENV_DIRCTORY: test
 
 permissions:
   id-token: write
@@ -30,10 +30,10 @@ permissions:
   pull-requests: write
 
 jobs:
-  terraform:
-    name: "TerraformCI"
+  test:
+    name: "TestCI"
     runs-on: ubuntu-latest
-    environment: production
+    environment: test
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
