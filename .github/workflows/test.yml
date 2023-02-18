@@ -1,16 +1,16 @@
 name: "GitHubActionByTest"
 
 on:
-  push:
-    paths:
-      - "trriger/**"
+  #  push:
+  #    paths:
+  #      - "trriger/**"
   pull_request:
     branches:
       - main
 
-    types: [closed]
+    types: [opened, synchronize, reopened, closed]
     paths:
-      - "trriger/**"
+      - "trriger/*.json"
   workflow_dispatch:
 #-------------------------#
 # 環境変数
