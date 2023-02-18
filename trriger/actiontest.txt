@@ -5,3 +5,4 @@ test4 pull_request作成時にActionsが動かない。
 test5 push時に稼働するかテスト２
 test6 再push で稼働するかテスト
 test7 GithubActionsが動かないこと
+test8 コミット後GithubActionが動かないこと
